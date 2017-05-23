@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class CircleSlider {
+
     private JPanel panelOne;
     private CirclePanel circleOne;
     private JTextArea numberBox;
@@ -28,7 +29,7 @@ public class CircleSlider {
         topPanel.add(numberBox);
 
         circleOne = new CirclePanel();
-        circleOne.setPreferredSize(new Dimension(300,300));
+        circleOne.setPreferredSize(new Dimension(280,280));
         circleOne.addMouseListener(new myMouseListener());
         circleOne.addMouseMotionListener(new myMouseListener());
 
@@ -42,6 +43,8 @@ public class CircleSlider {
 
         frame.pack();
         frame.setVisible(true);
+        System.out.println(frame.getWidth() +", " + frame.getHeight());
+        frame.setResizable(false);
     }
 
     class myMouseListener extends MouseAdapter {
@@ -54,12 +57,15 @@ public class CircleSlider {
         public void mouseDragged(MouseEvent e) {
             Point mouseLocation = panelOne.getMousePosition();
             int newTextFieldValue = circleOne.calcNewSize(mouseLocation.getX(),mouseLocation.getY());
-//			System.out.println(newTextFieldValue);
-            if(newTextFieldValue < 11) {
-                numberBox.setText(" " + newTextFieldValue + " ");
+            if(newTextFieldValue < 250) {
+                int divide = newTextFieldValue/19;
+                if(divide < 11) {
+                    numberBox.setText(" " + divide + " ");
+                }
             }
 //			circleOne.callRepaint(mouseLocation.getX(),mouseLocation.getY());
         }
+
     }
 }
 
@@ -68,9 +74,9 @@ class CirclePanel extends JPanel {
     private int xStart;
     private int yStart;
     private int displacement;
-    private int circleSize = 40;
+    private int circleSize = 15;
     private int xCoord = 130;
-    private int yCoord = 115;
+    private int yCoord = 130;
 
     public void paintComponent(Graphics g) {
         g.setColor(Color.WHITE);
@@ -90,14 +96,14 @@ class CirclePanel extends JPanel {
         displacement = (int) Math.abs(Math.hypot(xStart-currentX, yStart-currentY));
 //		System.out.println(displacement);
         resizeAndCallRepaint();
-        return displacement/10;
+        return displacement;
     }
 
     private void resizeAndCallRepaint() {
-        if(displacement < 95) {
-            circleSize = 40 + displacement;
+        if(displacement < 230) {
+            circleSize = 15 + displacement;
             xCoord = 130 - displacement/2;
-            yCoord = 115 - displacement/2;
+            yCoord = 130 - displacement/2;
         }
         this.repaint();
     }
