@@ -17,21 +17,17 @@ public class CircleSlider {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel q1 = new JLabel("How happy do you feel?");
-        q1.setBorder(BorderFactory.createLineBorder(Color.black, 2));
+        q1.setPreferredSize(new Dimension(100,40));
 
         circleOne = new CirclePanel();
         circleOne.setPreferredSize(new Dimension(300,300));
-        circleOne.setBorder(BorderFactory.createLineBorder(Color.green, 2));
+        circleOne.addMouseListener(new myMouseListener());
+        circleOne.addMouseMotionListener(new myMouseListener());
 
         panelOne = new JPanel();
         panelOne.setLayout(new BoxLayout(panelOne,BoxLayout.Y_AXIS));
-        panelOne.setBorder(BorderFactory.createLineBorder(Color.red, 2));
-        panelOne.addMouseListener(new myMouseListener());
-        panelOne.addMouseMotionListener(new myMouseListener());
 
         panelOne.add(q1);
-//		q1.setHorizontalAlignment(JLabel.CENTER);
-
         panelOne.add(circleOne);
 
         frame.setContentPane(panelOne);
@@ -45,48 +41,51 @@ public class CircleSlider {
         public void mousePressed(MouseEvent e) {
             Point mouseLocation = panelOne.getMousePosition();
             circleOne.setStart(mouseLocation.getX(), mouseLocation.getY());
-            System.out.println("START POINT SENT TO CIRCLE PANEL CLASS");
         }
 
         public void mouseDragged(MouseEvent e) {
             Point mouseLocation = panelOne.getMousePosition();
-            circleOne.callRepaint(mouseLocation.getX(),mouseLocation.getY());
-            System.out.println(circleOne.increaseFactor);
+            circleOne.calcNewSize(mouseLocation.getX(),mouseLocation.getY());
+//			circleOne.callRepaint(mouseLocation.getX(),mouseLocation.getY());
         }
-
     }
 }
 
 class CirclePanel extends JPanel {
 
-    private double xStart;
-    private double yStart;
-    double increaseFactor;
+    private int xStart;
+    private int yStart;
+    private int displacement;
     private int circleSize = 40;
+    private int xCoord = 130;
+    private int yCoord = 115;
 
     public void paintComponent(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect(0,0,this.getWidth(),this.getHeight());
         g.setColor(Color.BLACK);
-        g.fillOval(130,115,circleSize,circleSize);
+        g.fillOval(xCoord,yCoord,circleSize,circleSize);
     }
 
     void setStart(double xS, double yS) {
-        xStart = xS;
-        yStart = yS;
+        xStart = (int) xS;
+        yStart = (int) yS;
     }
 
-    void callRepaint(double xLoc, double yLoc) {
-        double xMove = Math.abs(xStart - xLoc);
-        double yMove = Math.abs(yStart - yLoc);
-        increaseFactor = (Math.abs(Math.hypot(xLoc, yLoc)));
-        if(increaseFactor < 300) {
-            circleSize = (int) increaseFactor;
+    void calcNewSize(double Xnow, double Ynow) {
+        int currentX = (int) Xnow;
+        int currentY = (int) Ynow;
+        displacement = (int) Math.abs(Math.hypot(xStart-currentX, yStart-currentY));
+        System.out.println(displacement);
+        resizeAndCallRepaint();
+    }
+
+    private void resizeAndCallRepaint() {
+        if(displacement < 95) {
+            circleSize = 40 + displacement;
+            xCoord = 130 - displacement/2;
+            yCoord = 115 - displacement/2;
         }
-//		xCoord -= increaseFactor/2;
-//		yCoord -= increaseFactor/2;
         this.repaint();
     }
 }
-
-//			System.out.println(mouseLocation.getX() + ", " + mouseLocation.getY());
