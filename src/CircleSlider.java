@@ -10,6 +10,7 @@ import java.util.Date;
 
 public class CircleSlider {
 
+    private JFrame frame;
     private JTextArea numberBox1;
     private JTextArea numberBox2;
     private JTextArea numberBox3;
@@ -46,61 +47,61 @@ public class CircleSlider {
 
         if(dialogSelection == JOptionPane.OK_OPTION) {
 
-            JFrame frame = new JFrame();
+            frame = new JFrame();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             JPanel mainPanel = new JPanel(new BorderLayout(5,5));
-//			mainPanel.setBorder(BorderFactory.createLineBorder(Color.RED));
+            mainPanel.setBorder(BorderFactory.createLineBorder(Color.RED));			//BORDER
 
             JLabel q1 = new JLabel(firstQ.getText());
             q1.setPreferredSize(new Dimension(150,40));
-//			q1.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+            q1.setBorder(BorderFactory.createLineBorder(Color.YELLOW));			//BORDER
 
             JLabel q2 = new JLabel(secondQ.getText());
             q2.setPreferredSize(new Dimension(150,40));
-//			q2.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+            q2.setBorder(BorderFactory.createLineBorder(Color.YELLOW));			//BORDER
 
             JLabel q3 = new JLabel(thirdQ.getText());
             q3.setPreferredSize(new Dimension(150,40));
-//			q3.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+            q3.setBorder(BorderFactory.createLineBorder(Color.YELLOW));			//BORDER
 
             numberBox1 = new JTextArea("0");
             numberBox1.setFont(numberBox1.getFont().deriveFont(Font.BOLD,14f));
             numberBox1.setBackground(new Color(238,238,238));
             numberBox1.setEditable(false);
-//			numberBox1.setBorder(BorderFactory.createLineBorder(Color.ORANGE));
+            numberBox1.setBorder(BorderFactory.createLineBorder(Color.ORANGE));		//BORDER
 
             numberBox2 = new JTextArea("0");
             numberBox2.setFont(numberBox2.getFont().deriveFont(Font.BOLD,14f));
             numberBox2.setBackground(new Color(238,238,238));
             numberBox2.setEditable(false);
-//			numberBox2.setBorder(BorderFactory.createLineBorder(Color.ORANGE));
+            numberBox2.setBorder(BorderFactory.createLineBorder(Color.ORANGE));		//BORDER
 
             numberBox3 = new JTextArea("0");
             numberBox3.setFont(numberBox3.getFont().deriveFont(Font.BOLD,14f));
             numberBox3.setBackground(new Color(238,238,238));
             numberBox3.setEditable(false);
-//			numberBox3.setBorder(BorderFactory.createLineBorder(Color.ORANGE));
+            numberBox3.setBorder(BorderFactory.createLineBorder(Color.ORANGE));		//BORDER
 
             JPanel topPanel1 = new JPanel();
-//			topPanel1.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+            topPanel1.setBorder(BorderFactory.createLineBorder(Color.GREEN));		//BORDER
             JPanel topPanel2 = new JPanel();
-//			topPanel2.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+            topPanel2.setBorder(BorderFactory.createLineBorder(Color.GREEN));		//BORDER
             JPanel topPanel3 = new JPanel();
-//			topPanel3.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+            topPanel3.setBorder(BorderFactory.createLineBorder(Color.GREEN));		//BORDER
 
             CirclePanel circleOne = new CirclePanel(Color.RED);
-//			circleOne.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            circleOne.setBorder(BorderFactory.createLineBorder(Color.BLACK));		//BORDER
             circleOne.addMouseListener(new MyMouseListener(numberBox1, circleOne));
             circleOne.addMouseMotionListener(new MyMouseListener(numberBox1, circleOne));
 
             CirclePanel circleTwo = new CirclePanel(Color.YELLOW);
-//			circleTwo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            circleTwo.setBorder(BorderFactory.createLineBorder(Color.BLACK));		//BORDER
             circleTwo.addMouseListener(new MyMouseListener(numberBox2, circleTwo));
             circleTwo.addMouseMotionListener(new MyMouseListener(numberBox2, circleTwo));
 
             CirclePanel circleThree = new CirclePanel(Color.BLUE);
-//			circleThree.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            circleThree.setBorder(BorderFactory.createLineBorder(Color.BLACK));		//BORDER
             circleThree.addMouseListener(new MyMouseListener(numberBox3, circleThree));
             circleThree.addMouseMotionListener(new MyMouseListener(numberBox3, circleThree));
 
@@ -108,11 +109,11 @@ public class CircleSlider {
             submitButton.addActionListener(new MyButtonListener());
 
             JPanel panelOne = new JPanel();
-//			panelOne.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+            panelOne.setBorder(BorderFactory.createLineBorder(Color.BLUE));			//BORDER
             JPanel panelTwo = new JPanel();
-//			panelTwo.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+            panelTwo.setBorder(BorderFactory.createLineBorder(Color.BLUE));			//BORDER
             JPanel panelThree = new JPanel();
-//			panelThree.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+            panelThree.setBorder(BorderFactory.createLineBorder(Color.BLUE));		//BORDER
 
             BoxLayout BLOne = new BoxLayout(panelOne,BoxLayout.Y_AXIS);
             BoxLayout BLTwo = new BoxLayout(panelTwo,BoxLayout.Y_AXIS);
@@ -134,7 +135,6 @@ public class CircleSlider {
 
             panelTwo.add(topPanel2);
             panelTwo.add(circleTwo);
-//			panelTwo.add(submitButton);
 
             panelThree.add(topPanel3);
             panelThree.add(circleThree);
@@ -158,23 +158,34 @@ public class CircleSlider {
     class MyButtonListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            try {
-                File outputFile = new File("Circle outputs.csv");
-                FileWriter writer = new FileWriter(outputFile,true);
+            int confirm = JOptionPane.showConfirmDialog(frame,"You are about to send your answers","Confirm send",JOptionPane.OK_CANCEL_OPTION);
+            if(confirm == JOptionPane.OK_OPTION) {
+                try {
+                    File outputFile = new File("Circle outputs.csv");
+                    FileWriter writer = new FileWriter(outputFile,true);
 
-                writer.write(name.getText() + "\n");
+                    writer.write(name.getText() + "\n");
 
-                Date now = new Date();
+                    Date now = new Date();
 
-//				writer.write(String.format("%tc", now) + "\n");
-                writer.write(String.format("%ta %<te %<tb %<tY %<tT", now) + "\n");
-                writer.write(firstQ.getText() + "," + numberBox1.getText() + "\n");
-                writer.write(secondQ.getText() + "," + numberBox2.getText() + "\n");
-                writer.write(thirdQ.getText() + "," + numberBox3.getText() + "\n" +"\n");
-                writer.flush();
-            } catch(Exception ex) {
-                System.out.println("Setting up writer and/or writing lines failed");
-                ex.printStackTrace();
+                    writer.write(String.format("%ta %<te %<tb %<tY %<tT", now) + "\n");
+                    writer.write(firstQ.getText() + "," + numberBox1.getText() + "\n");
+                    writer.write(secondQ.getText() + "," + numberBox2.getText() + "\n");
+                    writer.write(thirdQ.getText() + "," + numberBox3.getText() + "\n" +"\n");
+                    writer.flush();
+
+                } catch(Exception ex) {
+                    System.out.println("Setting up writer and/or writing lines failed");
+                    ex.printStackTrace();
+                }
+                JPanel confirmPage = new JPanel();
+                BorderLayout confirmPageLayout = new BorderLayout(10,10);
+                confirmPage.setLayout(confirmPageLayout);
+                JLabel confirmMessage = new JLabel("Your responses have been sent. Thank you",JLabel.CENTER);
+                confirmPage.add(confirmMessage,BorderLayout.CENTER);
+                frame.setContentPane(confirmPage);
+                frame.validate();
+                frame.repaint();
             }
         }
     }
@@ -204,10 +215,6 @@ public class CircleSlider {
                 }
             }
         }
-
-//		public void mouseReleased(MouseEvent e) {
-//			circle.addDisplacements();
-//		}
     }
 }
 
@@ -215,7 +222,7 @@ class CirclePanel extends JPanel {
 
     private int xStart;
     private int yStart;
-    private int displacement = 0;
+    private int totalDisplacement;
     private int circleSize = 15;
     private int xCoord = 130;
     private int yCoord = 130;
@@ -243,17 +250,25 @@ class CirclePanel extends JPanel {
     int calcNewSize(double Xnow, double Ynow) {
         int currentX = (int) Xnow;
         int currentY = (int) Ynow;
-        displacement = (int) Math.abs(Math.hypot(xStart-currentX, yStart-currentY));
-        System.out.println("displacement: " + displacement + ", circle size: " + circleSize);
+        int displacementForThisDrag = (int) Math.hypot(xStart-currentX, yStart-currentY);
+        System.out.println("total displacement: " + totalDisplacement + ", this displacement: " + displacementForThisDrag + ", circle size: " + circleSize);
+        if(currentX>xStart | currentY>yStart) {
+            totalDisplacement += displacementForThisDrag;
+        }
+        if(currentX<xStart | currentY<yStart) {
+            totalDisplacement -= displacementForThisDrag;
+        }
+        xStart = currentX;
+        yStart = currentY;
         resizeAndCallRepaint();
-        return displacement;
+        return totalDisplacement;
     }
 
     private void resizeAndCallRepaint() {
-        if(displacement < 230) {
-            circleSize = 15 + displacement;
-            xCoord = 130 - displacement/2;
-            yCoord = 130 - displacement/2;
+        if(totalDisplacement < 230) {
+            circleSize = 15 + totalDisplacement;
+            xCoord = 130 - totalDisplacement/2;
+            yCoord = 130 - totalDisplacement/2;
         }
         this.repaint();
     }
