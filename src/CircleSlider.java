@@ -289,10 +289,12 @@ class CirclePanel extends JPanel {
         int currentY = (int) Ynow;
         int displacementForThisDrag = (int) Math.hypot(xStart-currentX, yStart-currentY);
         System.out.println("total displacement: " + totalDisplacement + ", this displacement: " + displacementForThisDrag + ", circle size: " + circleSize);
-        if(currentX>xStart | currentY>yStart) {
+        int firstClickDistance = (int) Math.hypot(xStart-130,yStart-130);   //Distance from the original click of this drag to top, left corner of original unchanged circle
+        int currentDragDistance = (int) Math.hypot(currentX-130,currentY-130);  //Distance from the current position of mouse during drag to top, left corner of original unchanged circle
+        if(currentDragDistance>firstClickDistance) {
             totalDisplacement += displacementForThisDrag;
         }
-        if(currentX<xStart | currentY<yStart) {
+        if(currentDragDistance<firstClickDistance) {
             totalDisplacement -= displacementForThisDrag;
         }
         xStart = currentX;
