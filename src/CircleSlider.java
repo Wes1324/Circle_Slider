@@ -51,57 +51,81 @@ public class CircleSlider {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             JPanel mainPanel = new JPanel(new BorderLayout(5,5));
-            mainPanel.setBorder(BorderFactory.createLineBorder(Color.RED));			//BORDER
+//			mainPanel.setBorder(BorderFactory.createLineBorder(Color.RED));			//BORDER
 
-            JLabel q1 = new JLabel(firstQ.getText());
-            q1.setPreferredSize(new Dimension(150,40));
-            q1.setBorder(BorderFactory.createLineBorder(Color.YELLOW));			//BORDER
+            JTextArea q1 = new JTextArea(firstQ.getText());
+//			q1.setPreferredSize(new Dimension(230,50));
+//			q1.setBorder(BorderFactory.createLineBorder(Color.YELLOW));			//BORDER
+            q1.setLineWrap(true);
+            q1.setWrapStyleWord(true);
+            q1.setBackground(new Color(238,238,238));
+            q1.setFont(q1.getFont().deriveFont(Font.BOLD,14f));
+            q1.setEditable(false);
 
-            JLabel q2 = new JLabel(secondQ.getText());
-            q2.setPreferredSize(new Dimension(150,40));
-            q2.setBorder(BorderFactory.createLineBorder(Color.YELLOW));			//BORDER
+            JScrollPane q1Pane = new JScrollPane(q1,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            q1Pane.setPreferredSize(new Dimension(230,50));
 
-            JLabel q3 = new JLabel(thirdQ.getText());
-            q3.setPreferredSize(new Dimension(150,40));
-            q3.setBorder(BorderFactory.createLineBorder(Color.YELLOW));			//BORDER
+            JTextArea q2 = new JTextArea(secondQ.getText());
+//			q2.setPreferredSize(new Dimension(230,50));
+//			q2.setBorder(BorderFactory.createLineBorder(Color.YELLOW));			//BORDER
+            q2.setLineWrap(true);
+            q2.setWrapStyleWord(true);
+            q2.setBackground(new Color(238,238,238));
+            q2.setFont(q2.getFont().deriveFont(Font.BOLD,14f));
+            q2.setEditable(false);
 
-            numberBox1 = new JTextArea("0");
+            JScrollPane q2Pane = new JScrollPane(q2,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            q2Pane.setPreferredSize(new Dimension(230,50));
+
+            JTextArea q3 = new JTextArea(thirdQ.getText());
+//			q3.setPreferredSize(new Dimension(150,40));
+//			q3.setBorder(BorderFactory.createLineBorder(Color.YELLOW));			//BORDER
+            q3.setLineWrap(true);
+            q3.setWrapStyleWord(true);
+            q3.setBackground(new Color(238,238,238));
+            q3.setFont(q3.getFont().deriveFont(Font.BOLD,14f));
+            q3.setEditable(false);
+
+            JScrollPane q3Pane = new JScrollPane(q3,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            q3Pane.setPreferredSize(new Dimension(230,50));
+
+            numberBox1 = new JTextArea("0/10");
             numberBox1.setFont(numberBox1.getFont().deriveFont(Font.BOLD,14f));
             numberBox1.setBackground(new Color(238,238,238));
             numberBox1.setEditable(false);
-            numberBox1.setBorder(BorderFactory.createLineBorder(Color.ORANGE));		//BORDER
+//			numberBox1.setBorder(BorderFactory.createLineBorder(Color.ORANGE));		//BORDER
 
-            numberBox2 = new JTextArea("0");
+            numberBox2 = new JTextArea("0/10");
             numberBox2.setFont(numberBox2.getFont().deriveFont(Font.BOLD,14f));
             numberBox2.setBackground(new Color(238,238,238));
             numberBox2.setEditable(false);
-            numberBox2.setBorder(BorderFactory.createLineBorder(Color.ORANGE));		//BORDER
+//			numberBox2.setBorder(BorderFactory.createLineBorder(Color.ORANGE));		//BORDER
 
-            numberBox3 = new JTextArea("0");
+            numberBox3 = new JTextArea("0/10");
             numberBox3.setFont(numberBox3.getFont().deriveFont(Font.BOLD,14f));
             numberBox3.setBackground(new Color(238,238,238));
             numberBox3.setEditable(false);
-            numberBox3.setBorder(BorderFactory.createLineBorder(Color.ORANGE));		//BORDER
+//			numberBox3.setBorder(BorderFactory.createLineBorder(Color.ORANGE));		//BORDER
 
             JPanel topPanel1 = new JPanel();
-            topPanel1.setBorder(BorderFactory.createLineBorder(Color.GREEN));		//BORDER
+//			topPanel1.setBorder(BorderFactory.createLineBorder(Color.GREEN));		//BORDER
             JPanel topPanel2 = new JPanel();
-            topPanel2.setBorder(BorderFactory.createLineBorder(Color.GREEN));		//BORDER
+//			topPanel2.setBorder(BorderFactory.createLineBorder(Color.GREEN));		//BORDER
             JPanel topPanel3 = new JPanel();
-            topPanel3.setBorder(BorderFactory.createLineBorder(Color.GREEN));		//BORDER
+//			topPanel3.setBorder(BorderFactory.createLineBorder(Color.GREEN));		//BORDER
 
             CirclePanel circleOne = new CirclePanel(Color.RED);
-            circleOne.setBorder(BorderFactory.createLineBorder(Color.BLACK));		//BORDER
+//			circleOne.setBorder(BorderFactory.createLineBorder(Color.BLACK));		//BORDER
             circleOne.addMouseListener(new MyMouseListener(numberBox1, circleOne));
             circleOne.addMouseMotionListener(new MyMouseListener(numberBox1, circleOne));
 
             CirclePanel circleTwo = new CirclePanel(Color.YELLOW);
-            circleTwo.setBorder(BorderFactory.createLineBorder(Color.BLACK));		//BORDER
+//			circleTwo.setBorder(BorderFactory.createLineBorder(Color.BLACK));		//BORDER
             circleTwo.addMouseListener(new MyMouseListener(numberBox2, circleTwo));
             circleTwo.addMouseMotionListener(new MyMouseListener(numberBox2, circleTwo));
 
             CirclePanel circleThree = new CirclePanel(Color.BLUE);
-            circleThree.setBorder(BorderFactory.createLineBorder(Color.BLACK));		//BORDER
+//			circleThree.setBorder(BorderFactory.createLineBorder(Color.BLACK));		//BORDER
             circleThree.addMouseListener(new MyMouseListener(numberBox3, circleThree));
             circleThree.addMouseMotionListener(new MyMouseListener(numberBox3, circleThree));
 
@@ -109,11 +133,11 @@ public class CircleSlider {
             submitButton.addActionListener(new MyButtonListener());
 
             JPanel panelOne = new JPanel();
-            panelOne.setBorder(BorderFactory.createLineBorder(Color.BLUE));			//BORDER
+//			panelOne.setBorder(BorderFactory.createLineBorder(Color.BLUE));			//BORDER
             JPanel panelTwo = new JPanel();
-            panelTwo.setBorder(BorderFactory.createLineBorder(Color.BLUE));			//BORDER
+//			panelTwo.setBorder(BorderFactory.createLineBorder(Color.BLUE));			//BORDER
             JPanel panelThree = new JPanel();
-            panelThree.setBorder(BorderFactory.createLineBorder(Color.BLUE));		//BORDER
+//			panelThree.setBorder(BorderFactory.createLineBorder(Color.BLUE));		//BORDER
 
             BoxLayout BLOne = new BoxLayout(panelOne,BoxLayout.Y_AXIS);
             BoxLayout BLTwo = new BoxLayout(panelTwo,BoxLayout.Y_AXIS);
@@ -123,11 +147,11 @@ public class CircleSlider {
             panelTwo.setLayout(BLTwo);
             panelThree.setLayout(BLThree);
 
-            topPanel1.add(q1);
+            topPanel1.add(q1Pane);
             topPanel1.add(numberBox1);
-            topPanel2.add(q2);
+            topPanel2.add(q2Pane);
             topPanel2.add(numberBox2);
-            topPanel3.add(q3);
+            topPanel3.add(q3Pane);
             topPanel3.add(numberBox3);
 
             panelOne.add(topPanel1);
@@ -160,6 +184,12 @@ public class CircleSlider {
         public void actionPerformed(ActionEvent e) {
             int confirm = JOptionPane.showConfirmDialog(frame,"You are about to send your answers","Confirm send",JOptionPane.OK_CANCEL_OPTION);
             if(confirm == JOptionPane.OK_OPTION) {
+
+                JPanel confirmPage = new JPanel();
+                BorderLayout confirmPageLayout = new BorderLayout(10,10);
+                confirmPage.setLayout(confirmPageLayout);
+                JLabel confirmMessage;
+
                 try {
                     File outputFile = new File("Circle outputs.csv");
                     FileWriter writer = new FileWriter(outputFile,true);
@@ -168,20 +198,27 @@ public class CircleSlider {
 
                     Date now = new Date();
 
+                    String [] splitFirstBox = numberBox1.getText().split("/");
+                    String justNumber1 = splitFirstBox[0];
+                    String [] splitSecondBox = numberBox2.getText().split("/");
+                    String justNumber2 = splitSecondBox[0];
+                    String [] splitThirdBox = numberBox3.getText().split("/");
+                    String justNumber3 = splitThirdBox[0];
+
                     writer.write(String.format("%ta %<te %<tb %<tY %<tT", now) + "\n");
-                    writer.write(firstQ.getText() + "," + numberBox1.getText() + "\n");
-                    writer.write(secondQ.getText() + "," + numberBox2.getText() + "\n");
-                    writer.write(thirdQ.getText() + "," + numberBox3.getText() + "\n" +"\n");
+                    writer.write(firstQ.getText() + "," + justNumber1 + "\n");
+                    writer.write(secondQ.getText() + "," + justNumber2 + "\n");
+                    writer.write(thirdQ.getText() + "," + justNumber3 + "\n" +"\n");
                     writer.flush();
+
+                    confirmMessage = new JLabel("Your responses have been sent. Thank you",JLabel.CENTER);
 
                 } catch(Exception ex) {
                     System.out.println("Setting up writer and/or writing lines failed");
+                    confirmMessage = new JLabel("Error. Your responses HAVE NOT been sent. Please make sure the output excel spreadsheet for this program is not open. Thank you",JLabel.CENTER);
                     ex.printStackTrace();
                 }
-                JPanel confirmPage = new JPanel();
-                BorderLayout confirmPageLayout = new BorderLayout(10,10);
-                confirmPage.setLayout(confirmPageLayout);
-                JLabel confirmMessage = new JLabel("Your responses have been sent. Thank you",JLabel.CENTER);
+
                 confirmPage.add(confirmMessage,BorderLayout.CENTER);
                 frame.setContentPane(confirmPage);
                 frame.validate();
@@ -210,8 +247,8 @@ public class CircleSlider {
             int newTextFieldValue = circle.calcNewSize(mouseLocation.getX(),mouseLocation.getY());
             if(newTextFieldValue < 250) {
                 int divide = newTextFieldValue/19;
-                if(divide < 11) {
-                    numberBox.setText(Integer.toString(divide));
+                if(divide < 11 && divide > -1) {
+                    numberBox.setText(Integer.toString(divide) + "/10");
                 }
             }
         }
