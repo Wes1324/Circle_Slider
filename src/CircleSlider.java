@@ -1,3 +1,13 @@
+   /*
+    * A questionnaire application that allows users to quantitatively answer questions set by someone else by
+    * dragging circles to change their sizes.
+    * The person setting the questions must run the program and set the questions in the 'Program set-up' dialog
+    * before the user uses the program.
+    * When the user submits their answers, they will be output to a CSV file that can be manipulated in excel.
+    *
+    * Wesley Coffin-Jones 22/6/16
+    */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -48,7 +58,7 @@ public class CircleSlider {
         if(dialogSelection == JOptionPane.OK_OPTION) {
 
             frame = new JFrame();
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
             JPanel mainPanel = new JPanel(new BorderLayout(5,5));
 //			mainPanel.setBorder(BorderFactory.createLineBorder(Color.RED));			//BORDER
@@ -244,10 +254,15 @@ public class CircleSlider {
 
         public void mouseDragged(MouseEvent e) {
             Point mouseLocation = circle.getMousePosition();
-            int newTextFieldValue = circle.calcNewSize(mouseLocation.getX(),mouseLocation.getY());
-            if(newTextFieldValue < 250) {
+            int newTextFieldValue = 0;
+            if(mouseLocation != null) {
+                newTextFieldValue = circle.calcNewSize(mouseLocation.getX(), mouseLocation.getY());
+            } else {
+                System.out.println("Circle can grow no more for this mouse drag. Try releasing mouse and dragging again");
+            }
+            if(newTextFieldValue != 0 && newTextFieldValue < 250) {
                 int divide = newTextFieldValue/19;
-                if(divide < 11 && divide > -1) {
+                if(divide <= 10 && divide >= 0) {
                     numberBox.setText(Integer.toString(divide) + "/10");
                 }
             }
